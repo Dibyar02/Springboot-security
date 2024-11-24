@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.example.demo.dtos.LoginResponseDto;
 import com.example.demo.dtos.LoginUserDto;
 import com.example.demo.dtos.RegisterUserDto;
@@ -18,29 +17,29 @@ import com.example.demo.services.JwtService;
 @RestController
 public class AuthenticationController {
     private final JwtService jwtService;
-        
-            private final AuthenticationService authenticationService;
 
-                public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
-                        this.jwtService = jwtService;
-                                this.authenticationService = authenticationService;
-                                    }
+    private final AuthenticationService authenticationService;
 
-                                        @PostMapping("/signup")
-                                            public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
-                                                    User registeredUser = authenticationService.signup(registerUserDto);
+    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
+        this.jwtService = jwtService;
+        this.authenticationService = authenticationService;
+    }
 
-                                                            return ResponseEntity.ok(registeredUser);
-                                                                }
+    @PostMapping("/signup")
+    public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
+        User registeredUser = authenticationService.signup(registerUserDto);
 
-                                                                    @PostMapping("/login")
-                                                                        public ResponseEntity<LoginResponseDto> authenticate(@RequestBody LoginUserDto loginUserDto) {
-                                                                                User authenticatedUser = authenticationService.authenticate(loginUserDto);
+        return ResponseEntity.ok(registeredUser);
+    }
 
-                                                                                        String jwtToken = jwtService.generateToken(authenticatedUser);
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> authenticate(@RequestBody LoginUserDto loginUserDto) {
+        User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
-                                                                                                LoginResponseDto loginResponse = new LoginResponseDto().setToken(jwtToken);
+        String jwtToken = jwtService.generateToken(authenticatedUser);
 
-                                                                                                        return ResponseEntity.ok(loginResponse);
-                                                                                                            }
-                                                                                                            }
+        LoginResponseDto loginResponse = new LoginResponseDto().setToken(jwtToken);
+
+        return ResponseEntity.ok(loginResponse);
+    }
+}

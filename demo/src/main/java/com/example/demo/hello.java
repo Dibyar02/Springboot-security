@@ -10,6 +10,5 @@ public class hello {
     public String getMethodName() {
         return "Hi Dibya! Nice Try!!!!";
     }
-    
-    
+
 }

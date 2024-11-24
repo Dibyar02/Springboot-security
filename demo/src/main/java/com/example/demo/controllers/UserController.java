@@ -1,4 +1,5 @@
 package com.example.demo.controllers;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,23 +17,23 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-        public UserController(UserService userService) {
-                this.userService = userService;
-                    }
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
-                        @GetMapping("/me")
-                            public ResponseEntity<User> authenticatedUser() {
-                                    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    @GetMapping("/me")
+    public ResponseEntity<User> authenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-                                            User currentUser = (User) authentication.getPrincipal();
+        User currentUser = (User) authentication.getPrincipal();
 
-                                                    return ResponseEntity.ok(currentUser);
-                                                        }
+        return ResponseEntity.ok(currentUser);
+    }
 
-                                                            @GetMapping("/")
-                                                                public ResponseEntity<List<User>> allUsers() {
-                                                                        List <User> users = userService.allUsers();
+    @GetMapping("/")
+    public ResponseEntity<List<User>> allUsers() {
+        List<User> users = userService.allUsers();
 
-                                                                                return ResponseEntity.ok(users);
-                                                                                    }
-                                                                                    }
+        return ResponseEntity.ok(users);
+    }
+}
