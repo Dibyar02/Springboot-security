@@ -1,16 +1,18 @@
 package com.example.demo.controllers;
 
-import com.tericcabrel.authapi.entities.User;
-import com.tericcabrel.authapi.dtos.LoginUserDto;
-import com.tericcabrel.authapi.dtos.RegisterUserDto;
-import com.tericcabrel.authapi.responses.LoginResponse;
-import com.tericcabrel.authapi.services.AuthenticationService;
-import com.tericcabrel.authapi.services.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
+import com.example.demo.dtos.LoginResponseDto;
+import com.example.demo.dtos.LoginUserDto;
+import com.example.demo.dtos.RegisterUserDto;
+import com.example.demo.entities.User;
+import com.example.demo.services.AuthenticationService;
+import com.example.demo.services.JwtService;
 
 @RequestMapping("/auth")
 @RestController
@@ -32,12 +34,12 @@ public class AuthenticationController {
                                                                 }
 
                                                                     @PostMapping("/login")
-                                                                        public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
+                                                                        public ResponseEntity<LoginResponseDto> authenticate(@RequestBody LoginUserDto loginUserDto) {
                                                                                 User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
                                                                                         String jwtToken = jwtService.generateToken(authenticatedUser);
 
-                                                                                                LoginResponse loginResponse = new LoginResponse().setToken(jwtToken).setExpiresIn(jwtService.getExpirationTime());
+                                                                                                LoginResponseDto loginResponse = new LoginResponseDto().setToken(jwtToken);
 
                                                                                                         return ResponseEntity.ok(loginResponse);
                                                                                                             }

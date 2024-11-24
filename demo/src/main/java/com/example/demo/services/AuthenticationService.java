@@ -1,13 +1,14 @@
 package com.example.demo.services;
 
-import com.tericcabrel.authapi.dtos.LoginUserDto;
-import com.tericcabrel.authapi.dtos.RegisterUserDto;
-import com.tericcabrel.authapi.entities.User;
-import com.tericcabrel.authapi.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.dtos.LoginUserDto;
+import com.example.demo.dtos.RegisterUserDto;
+import com.example.demo.entities.User;
+import com.example.demo.repositories.UserRepository;
 
 @Service
 public class AuthenticationService {
@@ -28,10 +29,13 @@ public class AuthenticationService {
                                                                                 }
 
                                                                                     public User signup(RegisterUserDto input) {
-                                                                                            User user = new User()
-                                                                                                            .setFullName(input.getFullName())
-                                                                                                                            .setEmail(input.getEmail())
-                                                                                                                                            .setPassword(passwordEncoder.encode(input.getPassword()));
+                                                                                            User user = new User();
+                                                                                            user.setFullName(input.getFullName());
+                                                                                            user.setEmail(input.getEmail());
+                                                                                            user.setPassword(passwordEncoder.encode(input.getPassword()));
+                                                                                                             
+                                                                                                               
+                                                                                                                                            
 
                                                                                                                                                     return userRepository.save(user);
                                                                                                                                                         }

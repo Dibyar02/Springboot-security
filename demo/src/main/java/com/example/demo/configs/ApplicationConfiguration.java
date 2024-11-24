@@ -1,6 +1,6 @@
 package com.example.demo.configs;
 
-import com.tericcabrel.authapi.repositories.UserRepository;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.example.demo.repositories.UserRepository;
 
 @Configuration
 public class ApplicationConfiguration {

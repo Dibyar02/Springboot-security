@@ -1,8 +1,8 @@
 package com.example.demo.services;
-
-import com.tericcabrel.authapi.entities.User;
-import com.tericcabrel.authapi.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.entities.User;
+import com.example.demo.repositories.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,23 @@
 package com.example.demo.entities;
 
+import java.sql.Date;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.ObjDoubleConsumer;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 @Table(name = "users")
 @Entity
 public class User implements UserDetails {
@@ -29,8 +47,20 @@ public class User implements UserDetails {
                                                                         public Collection<? extends GrantedAuthority> getAuthorities() {
                                                                                 return List.of();
                                                                                     }
+public Object setFullName(String fullName){
+    this.fullName=fullName;
+    return this;
+}
+public Object setEmail(String email){
 
-                                                                                        public String getPassword() {
+    this.email=email;
+    return this;
+}
+ public Object setPassword(String password){
+
+    this.password=password;
+    return this;
+ }                                                                           public String getPassword() {
                                                                                                 return password;
                                                                                                     }
 
